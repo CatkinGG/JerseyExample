@@ -8,7 +8,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class SocketServer extends java.lang.Thread {
 	private boolean OutServer = false;
 	private ServerSocket server;
-	private final int ServerPort = 1208;// 要監控的port
+	private final int ServerPort = 8765;// 要監控的port
 	private DataStreamThread dataStream;
 	private KeyboardInputThread keyboardInputThread = new KeyboardInputThread();
 
@@ -44,6 +44,10 @@ public class SocketServer extends java.lang.Thread {
 				keyboardInputThread.setKeyboardInput(dataStream);
 
 				dataStream.start();
+				
+//				Thread.sleep(10000);
+//				System.out.println("中斷連線");
+//				socket.close();
 
 				// in.close();
 				// in = null;

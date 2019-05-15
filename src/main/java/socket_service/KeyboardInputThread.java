@@ -80,7 +80,10 @@ public class KeyboardInputThread extends Thread {
 				Commands.Command.Builder cmdInstance = Commands.Command.newBuilder();
 				Commands.Device.Builder device = Commands.Device.newBuilder();
 				device.setId("" + System.currentTimeMillis());
-				cmdInstance.setDevice(device);
+				
+				Commands.HeaderData.Builder header = Commands.HeaderData.newBuilder();
+				header.setDevice(device);
+				cmdInstance.setHeader(header);
 				cmdInstance.setResponse(Response.OK);
 
 				if (cmd.equals("" + Type.REGISTER_VALUE)) {// 1
@@ -133,6 +136,9 @@ public class KeyboardInputThread extends Thread {
 					LogoutData.Builder logoutBuilder = LogoutData.newBuilder();
 					logoutBuilder.setBank(Bank.newBuilder());
 					cmdInstance.setLogoutData(logoutBuilder);
+				} else if (cmd.equals("" + Type.FORCE_LOGOUT_VALUE)) {// 10
+					System.out.println("LOGOUT_VALUE");
+					cmdInstance.setType(Type.FORCE_LOGOUT);
 				} else {
 					continue;
 				}

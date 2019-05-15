@@ -2483,13 +2483,13 @@ public final class Commands {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>required .transfer_protobuf.Device device = 1;</code>
+     * <code>required .transfer_protobuf.HeaderData header = 1;</code>
      */
-    boolean hasDevice();
+    boolean hasHeader();
     /**
-     * <code>required .transfer_protobuf.Device device = 1;</code>
+     * <code>required .transfer_protobuf.HeaderData header = 1;</code>
      */
-    transfer_protobuf.Commands.Device getDevice();
+    transfer_protobuf.Commands.HeaderData getHeader();
 
     /**
      * <code>required .transfer_protobuf.Command.Type type = 2;</code>
@@ -2552,6 +2552,24 @@ public final class Commands {
      * <code>optional .transfer_protobuf.LogoutData logout_data = 7;</code>
      */
     transfer_protobuf.Commands.LogoutData getLogoutData();
+
+    /**
+     * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+     */
+    boolean hasPingpong();
+    /**
+     * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+     */
+    transfer_protobuf.Commands.PingPong getPingpong();
+
+    /**
+     * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+     */
+    boolean hasSyncHistoryData();
+    /**
+     * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+     */
+    transfer_protobuf.Commands.SyncHistoryData getSyncHistoryData();
   }
   /**
    * Protobuf type {@code transfer_protobuf.Command}
@@ -2562,7 +2580,6 @@ public final class Commands {
       // @@protoc_insertion_point(message_implements:transfer_protobuf.Command)
       CommandOrBuilder {
     private Command() {
-      response_ = 1;
     }
     /**
      * Protobuf enum {@code transfer_protobuf.Command.Type}
@@ -2605,6 +2622,46 @@ public final class Commands {
        * <code>LOGOUT = 4;</code>
        */
       LOGOUT(4),
+      /**
+       * <code>PING = 5;</code>
+       */
+      PING(5),
+      /**
+       * <code>PONG = 6;</code>
+       */
+      PONG(6),
+      /**
+       * <pre>
+       * ban this device.
+       * </pre>
+       *
+       * <code>TYPE_APP_DESTROY = 7;</code>
+       */
+      TYPE_APP_DESTROY(7),
+      /**
+       * <pre>
+       * turn to op login page.
+       * </pre>
+       *
+       * <code>TYPE_OP_RELOGIN = 8;</code>
+       */
+      TYPE_OP_RELOGIN(8),
+      /**
+       * <pre>
+       * paramenter : Device, SyncHistoryData
+       * </pre>
+       *
+       * <code>SYNC_HISTORY = 9;</code>
+       */
+      SYNC_HISTORY(9),
+      /**
+       * <pre>
+       * force this device to logout no matter it is working or not
+       * </pre>
+       *
+       * <code>FORCE_LOGOUT = 10;</code>
+       */
+      FORCE_LOGOUT(10),
       ;
 
       /**
@@ -2643,6 +2700,46 @@ public final class Commands {
        * <code>LOGOUT = 4;</code>
        */
       public static final int LOGOUT_VALUE = 4;
+      /**
+       * <code>PING = 5;</code>
+       */
+      public static final int PING_VALUE = 5;
+      /**
+       * <code>PONG = 6;</code>
+       */
+      public static final int PONG_VALUE = 6;
+      /**
+       * <pre>
+       * ban this device.
+       * </pre>
+       *
+       * <code>TYPE_APP_DESTROY = 7;</code>
+       */
+      public static final int TYPE_APP_DESTROY_VALUE = 7;
+      /**
+       * <pre>
+       * turn to op login page.
+       * </pre>
+       *
+       * <code>TYPE_OP_RELOGIN = 8;</code>
+       */
+      public static final int TYPE_OP_RELOGIN_VALUE = 8;
+      /**
+       * <pre>
+       * paramenter : Device, SyncHistoryData
+       * </pre>
+       *
+       * <code>SYNC_HISTORY = 9;</code>
+       */
+      public static final int SYNC_HISTORY_VALUE = 9;
+      /**
+       * <pre>
+       * force this device to logout no matter it is working or not
+       * </pre>
+       *
+       * <code>FORCE_LOGOUT = 10;</code>
+       */
+      public static final int FORCE_LOGOUT_VALUE = 10;
 
 
       public final int getNumber() {
@@ -2664,6 +2761,12 @@ public final class Commands {
           case 2: return TRANSFER;
           case 3: return SYNC_BALANCE;
           case 4: return LOGOUT;
+          case 5: return PING;
+          case 6: return PONG;
+          case 7: return TYPE_APP_DESTROY;
+          case 8: return TYPE_OP_RELOGIN;
+          case 9: return SYNC_HISTORY;
+          case 10: return FORCE_LOGOUT;
           default: return null;
         }
       }
@@ -2694,6 +2797,14 @@ public final class Commands {
      */
     public enum Response
         implements com.google.protobuf.Internal.EnumLite {
+      /**
+       * <pre>
+       * unkonw
+       * </pre>
+       *
+       * <code>UNKNOW = 0;</code>
+       */
+      UNKNOW(0),
       /**
        * <pre>
        * no error
@@ -2734,8 +2845,32 @@ public final class Commands {
        * <code>OPERATION_FAILED = 5;</code>
        */
       OPERATION_FAILED(5),
+      /**
+       * <pre>
+       * ban this device. (for reqister cmd)
+       * </pre>
+       *
+       * <code>APP_DESTROY = 6;</code>
+       */
+      APP_DESTROY(6),
+      /**
+       * <pre>
+       * turn to op login page.(for reqister cmd)
+       * </pre>
+       *
+       * <code>OP_RELOGIN = 7;</code>
+       */
+      OP_RELOGIN(7),
       ;
 
+      /**
+       * <pre>
+       * unkonw
+       * </pre>
+       *
+       * <code>UNKNOW = 0;</code>
+       */
+      public static final int UNKNOW_VALUE = 0;
       /**
        * <pre>
        * no error
@@ -2776,6 +2911,22 @@ public final class Commands {
        * <code>OPERATION_FAILED = 5;</code>
        */
       public static final int OPERATION_FAILED_VALUE = 5;
+      /**
+       * <pre>
+       * ban this device. (for reqister cmd)
+       * </pre>
+       *
+       * <code>APP_DESTROY = 6;</code>
+       */
+      public static final int APP_DESTROY_VALUE = 6;
+      /**
+       * <pre>
+       * turn to op login page.(for reqister cmd)
+       * </pre>
+       *
+       * <code>OP_RELOGIN = 7;</code>
+       */
+      public static final int OP_RELOGIN_VALUE = 7;
 
 
       public final int getNumber() {
@@ -2792,11 +2943,14 @@ public final class Commands {
 
       public static Response forNumber(int value) {
         switch (value) {
+          case 0: return UNKNOW;
           case 1: return OK;
           case 2: return INVALID_COMMAND;
           case 3: return INVALID_PARAMETER;
           case 4: return SERIALIZE_ERROR;
           case 5: return OPERATION_FAILED;
+          case 6: return APP_DESTROY;
+          case 7: return OP_RELOGIN;
           default: return null;
         }
       }
@@ -2823,55 +2977,55 @@ public final class Commands {
     }
 
     private int bitField0_;
-    public static final int DEVICE_FIELD_NUMBER = 1;
-    private transfer_protobuf.Commands.Device device_;
+    public static final int HEADER_FIELD_NUMBER = 1;
+    private transfer_protobuf.Commands.HeaderData header_;
     /**
-     * <code>required .transfer_protobuf.Device device = 1;</code>
+     * <code>required .transfer_protobuf.HeaderData header = 1;</code>
      */
-    public boolean hasDevice() {
+    public boolean hasHeader() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required .transfer_protobuf.Device device = 1;</code>
+     * <code>required .transfer_protobuf.HeaderData header = 1;</code>
      */
-    public transfer_protobuf.Commands.Device getDevice() {
-      return device_ == null ? transfer_protobuf.Commands.Device.getDefaultInstance() : device_;
+    public transfer_protobuf.Commands.HeaderData getHeader() {
+      return header_ == null ? transfer_protobuf.Commands.HeaderData.getDefaultInstance() : header_;
     }
     /**
-     * <code>required .transfer_protobuf.Device device = 1;</code>
+     * <code>required .transfer_protobuf.HeaderData header = 1;</code>
      */
-    private void setDevice(transfer_protobuf.Commands.Device value) {
+    private void setHeader(transfer_protobuf.Commands.HeaderData value) {
       if (value == null) {
         throw new NullPointerException();
       }
-      device_ = value;
+      header_ = value;
       bitField0_ |= 0x00000001;
       }
     /**
-     * <code>required .transfer_protobuf.Device device = 1;</code>
+     * <code>required .transfer_protobuf.HeaderData header = 1;</code>
      */
-    private void setDevice(
-        transfer_protobuf.Commands.Device.Builder builderForValue) {
-      device_ = builderForValue.build();
+    private void setHeader(
+        transfer_protobuf.Commands.HeaderData.Builder builderForValue) {
+      header_ = builderForValue.build();
       bitField0_ |= 0x00000001;
     }
     /**
-     * <code>required .transfer_protobuf.Device device = 1;</code>
+     * <code>required .transfer_protobuf.HeaderData header = 1;</code>
      */
-    private void mergeDevice(transfer_protobuf.Commands.Device value) {
-      if (device_ != null &&
-          device_ != transfer_protobuf.Commands.Device.getDefaultInstance()) {
-        device_ =
-          transfer_protobuf.Commands.Device.newBuilder(device_).mergeFrom(value).buildPartial();
+    private void mergeHeader(transfer_protobuf.Commands.HeaderData value) {
+      if (header_ != null &&
+          header_ != transfer_protobuf.Commands.HeaderData.getDefaultInstance()) {
+        header_ =
+          transfer_protobuf.Commands.HeaderData.newBuilder(header_).mergeFrom(value).buildPartial();
       } else {
-        device_ = value;
+        header_ = value;
       }
       bitField0_ |= 0x00000001;
     }
     /**
-     * <code>required .transfer_protobuf.Device device = 1;</code>
+     * <code>required .transfer_protobuf.HeaderData header = 1;</code>
      */
-    private void clearDevice() {  device_ = null;
+    private void clearHeader() {  header_ = null;
       bitField0_ = (bitField0_ & ~0x00000001);
     }
 
@@ -2921,7 +3075,7 @@ public final class Commands {
      */
     public transfer_protobuf.Commands.Command.Response getResponse() {
       transfer_protobuf.Commands.Command.Response result = transfer_protobuf.Commands.Command.Response.forNumber(response_);
-      return result == null ? transfer_protobuf.Commands.Command.Response.OK : result;
+      return result == null ? transfer_protobuf.Commands.Command.Response.UNKNOW : result;
     }
     /**
      * <code>optional .transfer_protobuf.Command.Response response = 3;</code>
@@ -2938,7 +3092,7 @@ public final class Commands {
      */
     private void clearResponse() {
       bitField0_ = (bitField0_ & ~0x00000004);
-      response_ = 1;
+      response_ = 0;
     }
 
     public static final int REGISTER_DATA_FIELD_NUMBER = 4;
@@ -3173,10 +3327,114 @@ public final class Commands {
       bitField0_ = (bitField0_ & ~0x00000040);
     }
 
+    public static final int PINGPONG_FIELD_NUMBER = 8;
+    private transfer_protobuf.Commands.PingPong pingpong_;
+    /**
+     * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+     */
+    public boolean hasPingpong() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+     */
+    public transfer_protobuf.Commands.PingPong getPingpong() {
+      return pingpong_ == null ? transfer_protobuf.Commands.PingPong.getDefaultInstance() : pingpong_;
+    }
+    /**
+     * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+     */
+    private void setPingpong(transfer_protobuf.Commands.PingPong value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      pingpong_ = value;
+      bitField0_ |= 0x00000080;
+      }
+    /**
+     * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+     */
+    private void setPingpong(
+        transfer_protobuf.Commands.PingPong.Builder builderForValue) {
+      pingpong_ = builderForValue.build();
+      bitField0_ |= 0x00000080;
+    }
+    /**
+     * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+     */
+    private void mergePingpong(transfer_protobuf.Commands.PingPong value) {
+      if (pingpong_ != null &&
+          pingpong_ != transfer_protobuf.Commands.PingPong.getDefaultInstance()) {
+        pingpong_ =
+          transfer_protobuf.Commands.PingPong.newBuilder(pingpong_).mergeFrom(value).buildPartial();
+      } else {
+        pingpong_ = value;
+      }
+      bitField0_ |= 0x00000080;
+    }
+    /**
+     * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+     */
+    private void clearPingpong() {  pingpong_ = null;
+      bitField0_ = (bitField0_ & ~0x00000080);
+    }
+
+    public static final int SYNCHISTORYDATA_FIELD_NUMBER = 9;
+    private transfer_protobuf.Commands.SyncHistoryData syncHistoryData_;
+    /**
+     * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+     */
+    public boolean hasSyncHistoryData() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+     */
+    public transfer_protobuf.Commands.SyncHistoryData getSyncHistoryData() {
+      return syncHistoryData_ == null ? transfer_protobuf.Commands.SyncHistoryData.getDefaultInstance() : syncHistoryData_;
+    }
+    /**
+     * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+     */
+    private void setSyncHistoryData(transfer_protobuf.Commands.SyncHistoryData value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      syncHistoryData_ = value;
+      bitField0_ |= 0x00000100;
+      }
+    /**
+     * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+     */
+    private void setSyncHistoryData(
+        transfer_protobuf.Commands.SyncHistoryData.Builder builderForValue) {
+      syncHistoryData_ = builderForValue.build();
+      bitField0_ |= 0x00000100;
+    }
+    /**
+     * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+     */
+    private void mergeSyncHistoryData(transfer_protobuf.Commands.SyncHistoryData value) {
+      if (syncHistoryData_ != null &&
+          syncHistoryData_ != transfer_protobuf.Commands.SyncHistoryData.getDefaultInstance()) {
+        syncHistoryData_ =
+          transfer_protobuf.Commands.SyncHistoryData.newBuilder(syncHistoryData_).mergeFrom(value).buildPartial();
+      } else {
+        syncHistoryData_ = value;
+      }
+      bitField0_ |= 0x00000100;
+    }
+    /**
+     * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+     */
+    private void clearSyncHistoryData() {  syncHistoryData_ = null;
+      bitField0_ = (bitField0_ & ~0x00000100);
+    }
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, getDevice());
+        output.writeMessage(1, getHeader());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(2, type_);
@@ -3196,6 +3454,12 @@ public final class Commands {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeMessage(7, getLogoutData());
       }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeMessage(8, getPingpong());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeMessage(9, getSyncHistoryData());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -3206,7 +3470,7 @@ public final class Commands {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getDevice());
+          .computeMessageSize(1, getHeader());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -3231,6 +3495,14 @@ public final class Commands {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, getLogoutData());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, getPingpong());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, getSyncHistoryData());
       }
       size += unknownFields.getSerializedSize();
       memoizedSerializedSize = size;
@@ -3320,47 +3592,47 @@ public final class Commands {
 
 
       /**
-       * <code>required .transfer_protobuf.Device device = 1;</code>
+       * <code>required .transfer_protobuf.HeaderData header = 1;</code>
        */
-      public boolean hasDevice() {
-        return instance.hasDevice();
+      public boolean hasHeader() {
+        return instance.hasHeader();
       }
       /**
-       * <code>required .transfer_protobuf.Device device = 1;</code>
+       * <code>required .transfer_protobuf.HeaderData header = 1;</code>
        */
-      public transfer_protobuf.Commands.Device getDevice() {
-        return instance.getDevice();
+      public transfer_protobuf.Commands.HeaderData getHeader() {
+        return instance.getHeader();
       }
       /**
-       * <code>required .transfer_protobuf.Device device = 1;</code>
+       * <code>required .transfer_protobuf.HeaderData header = 1;</code>
        */
-      public Builder setDevice(transfer_protobuf.Commands.Device value) {
+      public Builder setHeader(transfer_protobuf.Commands.HeaderData value) {
         copyOnWrite();
-        instance.setDevice(value);
+        instance.setHeader(value);
         return this;
         }
       /**
-       * <code>required .transfer_protobuf.Device device = 1;</code>
+       * <code>required .transfer_protobuf.HeaderData header = 1;</code>
        */
-      public Builder setDevice(
-          transfer_protobuf.Commands.Device.Builder builderForValue) {
+      public Builder setHeader(
+          transfer_protobuf.Commands.HeaderData.Builder builderForValue) {
         copyOnWrite();
-        instance.setDevice(builderForValue);
+        instance.setHeader(builderForValue);
         return this;
       }
       /**
-       * <code>required .transfer_protobuf.Device device = 1;</code>
+       * <code>required .transfer_protobuf.HeaderData header = 1;</code>
        */
-      public Builder mergeDevice(transfer_protobuf.Commands.Device value) {
+      public Builder mergeHeader(transfer_protobuf.Commands.HeaderData value) {
         copyOnWrite();
-        instance.mergeDevice(value);
+        instance.mergeHeader(value);
         return this;
       }
       /**
-       * <code>required .transfer_protobuf.Device device = 1;</code>
+       * <code>required .transfer_protobuf.HeaderData header = 1;</code>
        */
-      public Builder clearDevice() {  copyOnWrite();
-        instance.clearDevice();
+      public Builder clearHeader() {  copyOnWrite();
+        instance.clearHeader();
         return this;
       }
 
@@ -3626,6 +3898,96 @@ public final class Commands {
         return this;
       }
 
+      /**
+       * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+       */
+      public boolean hasPingpong() {
+        return instance.hasPingpong();
+      }
+      /**
+       * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+       */
+      public transfer_protobuf.Commands.PingPong getPingpong() {
+        return instance.getPingpong();
+      }
+      /**
+       * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+       */
+      public Builder setPingpong(transfer_protobuf.Commands.PingPong value) {
+        copyOnWrite();
+        instance.setPingpong(value);
+        return this;
+        }
+      /**
+       * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+       */
+      public Builder setPingpong(
+          transfer_protobuf.Commands.PingPong.Builder builderForValue) {
+        copyOnWrite();
+        instance.setPingpong(builderForValue);
+        return this;
+      }
+      /**
+       * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+       */
+      public Builder mergePingpong(transfer_protobuf.Commands.PingPong value) {
+        copyOnWrite();
+        instance.mergePingpong(value);
+        return this;
+      }
+      /**
+       * <code>optional .transfer_protobuf.PingPong pingpong = 8;</code>
+       */
+      public Builder clearPingpong() {  copyOnWrite();
+        instance.clearPingpong();
+        return this;
+      }
+
+      /**
+       * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+       */
+      public boolean hasSyncHistoryData() {
+        return instance.hasSyncHistoryData();
+      }
+      /**
+       * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+       */
+      public transfer_protobuf.Commands.SyncHistoryData getSyncHistoryData() {
+        return instance.getSyncHistoryData();
+      }
+      /**
+       * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+       */
+      public Builder setSyncHistoryData(transfer_protobuf.Commands.SyncHistoryData value) {
+        copyOnWrite();
+        instance.setSyncHistoryData(value);
+        return this;
+        }
+      /**
+       * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+       */
+      public Builder setSyncHistoryData(
+          transfer_protobuf.Commands.SyncHistoryData.Builder builderForValue) {
+        copyOnWrite();
+        instance.setSyncHistoryData(builderForValue);
+        return this;
+      }
+      /**
+       * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+       */
+      public Builder mergeSyncHistoryData(transfer_protobuf.Commands.SyncHistoryData value) {
+        copyOnWrite();
+        instance.mergeSyncHistoryData(value);
+        return this;
+      }
+      /**
+       * <code>optional .transfer_protobuf.SyncHistoryData syncHistoryData = 9;</code>
+       */
+      public Builder clearSyncHistoryData() {  copyOnWrite();
+        instance.clearSyncHistoryData();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:transfer_protobuf.Command)
     }
     private byte memoizedIsInitialized = -1;
@@ -3642,7 +4004,7 @@ public final class Commands {
           if (isInitialized == 0) return null;
 
           boolean shouldMemoize = ((Boolean) arg0).booleanValue();
-          if (!hasDevice()) {
+          if (!hasHeader()) {
             if (shouldMemoize) {
               memoizedIsInitialized = 0;
             }
@@ -3654,7 +4016,7 @@ public final class Commands {
             }
             return null;
           }
-          if (!getDevice().isInitialized()) {
+          if (!getHeader().isInitialized()) {
             if (shouldMemoize) {
               memoizedIsInitialized = 0;
             }
@@ -3692,6 +4054,22 @@ public final class Commands {
               return null;
             }
           }
+          if (hasPingpong()) {
+            if (!getPingpong().isInitialized()) {
+              if (shouldMemoize) {
+                memoizedIsInitialized = 0;
+              }
+              return null;
+            }
+          }
+          if (hasSyncHistoryData()) {
+            if (!getSyncHistoryData().isInitialized()) {
+              if (shouldMemoize) {
+                memoizedIsInitialized = 0;
+              }
+              return null;
+            }
+          }
           if (shouldMemoize) memoizedIsInitialized = 1;
           return DEFAULT_INSTANCE;
 
@@ -3705,7 +4083,7 @@ public final class Commands {
         case VISIT: {
           Visitor visitor = (Visitor) arg0;
           transfer_protobuf.Commands.Command other = (transfer_protobuf.Commands.Command) arg1;
-          device_ = visitor.visitMessage(device_, other.device_);
+          header_ = visitor.visitMessage(header_, other.header_);
           type_ = visitor.visitInt(hasType(), type_,
               other.hasType(), other.type_);
           response_ = visitor.visitInt(hasResponse(), response_,
@@ -3714,6 +4092,8 @@ public final class Commands {
           transferData_ = visitor.visitMessage(transferData_, other.transferData_);
           syncBalanceData_ = visitor.visitMessage(syncBalanceData_, other.syncBalanceData_);
           logoutData_ = visitor.visitMessage(logoutData_, other.logoutData_);
+          pingpong_ = visitor.visitMessage(pingpong_, other.pingpong_);
+          syncHistoryData_ = visitor.visitMessage(syncHistoryData_, other.syncHistoryData_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
             bitField0_ |= other.bitField0_;
@@ -3740,14 +4120,14 @@ public final class Commands {
                   break;
                 }
                 case 10: {
-                  transfer_protobuf.Commands.Device.Builder subBuilder = null;
+                  transfer_protobuf.Commands.HeaderData.Builder subBuilder = null;
                   if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                    subBuilder = device_.toBuilder();
+                    subBuilder = header_.toBuilder();
                   }
-                  device_ = input.readMessage(transfer_protobuf.Commands.Device.parser(), extensionRegistry);
+                  header_ = input.readMessage(transfer_protobuf.Commands.HeaderData.parser(), extensionRegistry);
                   if (subBuilder != null) {
-                    subBuilder.mergeFrom(device_);
-                    device_ = subBuilder.buildPartial();
+                    subBuilder.mergeFrom(header_);
+                    header_ = subBuilder.buildPartial();
                   }
                   bitField0_ |= 0x00000001;
                   break;
@@ -3826,6 +4206,32 @@ public final class Commands {
                   bitField0_ |= 0x00000040;
                   break;
                 }
+                case 66: {
+                  transfer_protobuf.Commands.PingPong.Builder subBuilder = null;
+                  if (((bitField0_ & 0x00000080) == 0x00000080)) {
+                    subBuilder = pingpong_.toBuilder();
+                  }
+                  pingpong_ = input.readMessage(transfer_protobuf.Commands.PingPong.parser(), extensionRegistry);
+                  if (subBuilder != null) {
+                    subBuilder.mergeFrom(pingpong_);
+                    pingpong_ = subBuilder.buildPartial();
+                  }
+                  bitField0_ |= 0x00000080;
+                  break;
+                }
+                case 74: {
+                  transfer_protobuf.Commands.SyncHistoryData.Builder subBuilder = null;
+                  if (((bitField0_ & 0x00000100) == 0x00000100)) {
+                    subBuilder = syncHistoryData_.toBuilder();
+                  }
+                  syncHistoryData_ = input.readMessage(transfer_protobuf.Commands.SyncHistoryData.parser(), extensionRegistry);
+                  if (subBuilder != null) {
+                    subBuilder.mergeFrom(syncHistoryData_);
+                    syncHistoryData_ = subBuilder.buildPartial();
+                  }
+                  bitField0_ |= 0x00000100;
+                  break;
+                }
               }
             }
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -3872,6 +4278,1685 @@ public final class Commands {
     }
   }
 
+  public interface HeaderDataOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:transfer_protobuf.HeaderData)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required .transfer_protobuf.Device device = 1;</code>
+     */
+    boolean hasDevice();
+    /**
+     * <code>required .transfer_protobuf.Device device = 1;</code>
+     */
+    transfer_protobuf.Commands.Device getDevice();
+
+    /**
+     * <code>optional string ip = 2;</code>
+     */
+    boolean hasIp();
+    /**
+     * <code>optional string ip = 2;</code>
+     */
+    java.lang.String getIp();
+    /**
+     * <code>optional string ip = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getIpBytes();
+
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    java.util.List<transfer_protobuf.Commands.MetaData> 
+        getMetaList();
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    transfer_protobuf.Commands.MetaData getMeta(int index);
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    int getMetaCount();
+  }
+  /**
+   * Protobuf type {@code transfer_protobuf.HeaderData}
+   */
+  public  static final class HeaderData extends
+      com.google.protobuf.GeneratedMessageLite<
+          HeaderData, HeaderData.Builder> implements
+      // @@protoc_insertion_point(message_implements:transfer_protobuf.HeaderData)
+      HeaderDataOrBuilder {
+    private HeaderData() {
+      ip_ = "";
+      meta_ = emptyProtobufList();
+    }
+    private int bitField0_;
+    public static final int DEVICE_FIELD_NUMBER = 1;
+    private transfer_protobuf.Commands.Device device_;
+    /**
+     * <code>required .transfer_protobuf.Device device = 1;</code>
+     */
+    public boolean hasDevice() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .transfer_protobuf.Device device = 1;</code>
+     */
+    public transfer_protobuf.Commands.Device getDevice() {
+      return device_ == null ? transfer_protobuf.Commands.Device.getDefaultInstance() : device_;
+    }
+    /**
+     * <code>required .transfer_protobuf.Device device = 1;</code>
+     */
+    private void setDevice(transfer_protobuf.Commands.Device value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      device_ = value;
+      bitField0_ |= 0x00000001;
+      }
+    /**
+     * <code>required .transfer_protobuf.Device device = 1;</code>
+     */
+    private void setDevice(
+        transfer_protobuf.Commands.Device.Builder builderForValue) {
+      device_ = builderForValue.build();
+      bitField0_ |= 0x00000001;
+    }
+    /**
+     * <code>required .transfer_protobuf.Device device = 1;</code>
+     */
+    private void mergeDevice(transfer_protobuf.Commands.Device value) {
+      if (device_ != null &&
+          device_ != transfer_protobuf.Commands.Device.getDefaultInstance()) {
+        device_ =
+          transfer_protobuf.Commands.Device.newBuilder(device_).mergeFrom(value).buildPartial();
+      } else {
+        device_ = value;
+      }
+      bitField0_ |= 0x00000001;
+    }
+    /**
+     * <code>required .transfer_protobuf.Device device = 1;</code>
+     */
+    private void clearDevice() {  device_ = null;
+      bitField0_ = (bitField0_ & ~0x00000001);
+    }
+
+    public static final int IP_FIELD_NUMBER = 2;
+    private java.lang.String ip_;
+    /**
+     * <code>optional string ip = 2;</code>
+     */
+    public boolean hasIp() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string ip = 2;</code>
+     */
+    public java.lang.String getIp() {
+      return ip_;
+    }
+    /**
+     * <code>optional string ip = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIpBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(ip_);
+    }
+    /**
+     * <code>optional string ip = 2;</code>
+     */
+    private void setIp(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+      ip_ = value;
+    }
+    /**
+     * <code>optional string ip = 2;</code>
+     */
+    private void clearIp() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      ip_ = getDefaultInstance().getIp();
+    }
+    /**
+     * <code>optional string ip = 2;</code>
+     */
+    private void setIpBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+      ip_ = value.toStringUtf8();
+    }
+
+    public static final int META_FIELD_NUMBER = 3;
+    private com.google.protobuf.Internal.ProtobufList<transfer_protobuf.Commands.MetaData> meta_;
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    public java.util.List<transfer_protobuf.Commands.MetaData> getMetaList() {
+      return meta_;
+    }
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    public java.util.List<? extends transfer_protobuf.Commands.MetaDataOrBuilder> 
+        getMetaOrBuilderList() {
+      return meta_;
+    }
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    public int getMetaCount() {
+      return meta_.size();
+    }
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    public transfer_protobuf.Commands.MetaData getMeta(int index) {
+      return meta_.get(index);
+    }
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    public transfer_protobuf.Commands.MetaDataOrBuilder getMetaOrBuilder(
+        int index) {
+      return meta_.get(index);
+    }
+    private void ensureMetaIsMutable() {
+      if (!meta_.isModifiable()) {
+        meta_ =
+            com.google.protobuf.GeneratedMessageLite.mutableCopy(meta_);
+       }
+    }
+
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    private void setMeta(
+        int index, transfer_protobuf.Commands.MetaData value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensureMetaIsMutable();
+      meta_.set(index, value);
+    }
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    private void setMeta(
+        int index, transfer_protobuf.Commands.MetaData.Builder builderForValue) {
+      ensureMetaIsMutable();
+      meta_.set(index, builderForValue.build());
+    }
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    private void addMeta(transfer_protobuf.Commands.MetaData value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensureMetaIsMutable();
+      meta_.add(value);
+    }
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    private void addMeta(
+        int index, transfer_protobuf.Commands.MetaData value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensureMetaIsMutable();
+      meta_.add(index, value);
+    }
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    private void addMeta(
+        transfer_protobuf.Commands.MetaData.Builder builderForValue) {
+      ensureMetaIsMutable();
+      meta_.add(builderForValue.build());
+    }
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    private void addMeta(
+        int index, transfer_protobuf.Commands.MetaData.Builder builderForValue) {
+      ensureMetaIsMutable();
+      meta_.add(index, builderForValue.build());
+    }
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    private void addAllMeta(
+        java.lang.Iterable<? extends transfer_protobuf.Commands.MetaData> values) {
+      ensureMetaIsMutable();
+      com.google.protobuf.AbstractMessageLite.addAll(
+          values, meta_);
+    }
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    private void clearMeta() {
+      meta_ = emptyProtobufList();
+    }
+    /**
+     * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+     */
+    private void removeMeta(int index) {
+      ensureMetaIsMutable();
+      meta_.remove(index);
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, getDevice());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeString(2, getIp());
+      }
+      for (int i = 0; i < meta_.size(); i++) {
+        output.writeMessage(3, meta_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getDevice());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getIp());
+      }
+      for (int i = 0; i < meta_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, meta_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static transfer_protobuf.Commands.HeaderData parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static transfer_protobuf.Commands.HeaderData parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.HeaderData parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static transfer_protobuf.Commands.HeaderData parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.HeaderData parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static transfer_protobuf.Commands.HeaderData parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.HeaderData parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static transfer_protobuf.Commands.HeaderData parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.HeaderData parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static transfer_protobuf.Commands.HeaderData parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(transfer_protobuf.Commands.HeaderData prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * Protobuf type {@code transfer_protobuf.HeaderData}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          transfer_protobuf.Commands.HeaderData, Builder> implements
+        // @@protoc_insertion_point(builder_implements:transfer_protobuf.HeaderData)
+        transfer_protobuf.Commands.HeaderDataOrBuilder {
+      // Construct using transfer_protobuf.Commands.HeaderData.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>required .transfer_protobuf.Device device = 1;</code>
+       */
+      public boolean hasDevice() {
+        return instance.hasDevice();
+      }
+      /**
+       * <code>required .transfer_protobuf.Device device = 1;</code>
+       */
+      public transfer_protobuf.Commands.Device getDevice() {
+        return instance.getDevice();
+      }
+      /**
+       * <code>required .transfer_protobuf.Device device = 1;</code>
+       */
+      public Builder setDevice(transfer_protobuf.Commands.Device value) {
+        copyOnWrite();
+        instance.setDevice(value);
+        return this;
+        }
+      /**
+       * <code>required .transfer_protobuf.Device device = 1;</code>
+       */
+      public Builder setDevice(
+          transfer_protobuf.Commands.Device.Builder builderForValue) {
+        copyOnWrite();
+        instance.setDevice(builderForValue);
+        return this;
+      }
+      /**
+       * <code>required .transfer_protobuf.Device device = 1;</code>
+       */
+      public Builder mergeDevice(transfer_protobuf.Commands.Device value) {
+        copyOnWrite();
+        instance.mergeDevice(value);
+        return this;
+      }
+      /**
+       * <code>required .transfer_protobuf.Device device = 1;</code>
+       */
+      public Builder clearDevice() {  copyOnWrite();
+        instance.clearDevice();
+        return this;
+      }
+
+      /**
+       * <code>optional string ip = 2;</code>
+       */
+      public boolean hasIp() {
+        return instance.hasIp();
+      }
+      /**
+       * <code>optional string ip = 2;</code>
+       */
+      public java.lang.String getIp() {
+        return instance.getIp();
+      }
+      /**
+       * <code>optional string ip = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIpBytes() {
+        return instance.getIpBytes();
+      }
+      /**
+       * <code>optional string ip = 2;</code>
+       */
+      public Builder setIp(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setIp(value);
+        return this;
+      }
+      /**
+       * <code>optional string ip = 2;</code>
+       */
+      public Builder clearIp() {
+        copyOnWrite();
+        instance.clearIp();
+        return this;
+      }
+      /**
+       * <code>optional string ip = 2;</code>
+       */
+      public Builder setIpBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setIpBytes(value);
+        return this;
+      }
+
+      /**
+       * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+       */
+      public java.util.List<transfer_protobuf.Commands.MetaData> getMetaList() {
+        return java.util.Collections.unmodifiableList(
+            instance.getMetaList());
+      }
+      /**
+       * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+       */
+      public int getMetaCount() {
+        return instance.getMetaCount();
+      }/**
+       * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+       */
+      public transfer_protobuf.Commands.MetaData getMeta(int index) {
+        return instance.getMeta(index);
+      }
+      /**
+       * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+       */
+      public Builder setMeta(
+          int index, transfer_protobuf.Commands.MetaData value) {
+        copyOnWrite();
+        instance.setMeta(index, value);
+        return this;
+      }
+      /**
+       * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+       */
+      public Builder setMeta(
+          int index, transfer_protobuf.Commands.MetaData.Builder builderForValue) {
+        copyOnWrite();
+        instance.setMeta(index, builderForValue);
+        return this;
+      }
+      /**
+       * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+       */
+      public Builder addMeta(transfer_protobuf.Commands.MetaData value) {
+        copyOnWrite();
+        instance.addMeta(value);
+        return this;
+      }
+      /**
+       * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+       */
+      public Builder addMeta(
+          int index, transfer_protobuf.Commands.MetaData value) {
+        copyOnWrite();
+        instance.addMeta(index, value);
+        return this;
+      }
+      /**
+       * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+       */
+      public Builder addMeta(
+          transfer_protobuf.Commands.MetaData.Builder builderForValue) {
+        copyOnWrite();
+        instance.addMeta(builderForValue);
+        return this;
+      }
+      /**
+       * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+       */
+      public Builder addMeta(
+          int index, transfer_protobuf.Commands.MetaData.Builder builderForValue) {
+        copyOnWrite();
+        instance.addMeta(index, builderForValue);
+        return this;
+      }
+      /**
+       * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+       */
+      public Builder addAllMeta(
+          java.lang.Iterable<? extends transfer_protobuf.Commands.MetaData> values) {
+        copyOnWrite();
+        instance.addAllMeta(values);
+        return this;
+      }
+      /**
+       * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+       */
+      public Builder clearMeta() {
+        copyOnWrite();
+        instance.clearMeta();
+        return this;
+      }
+      /**
+       * <code>repeated .transfer_protobuf.MetaData meta = 3;</code>
+       */
+      public Builder removeMeta(int index) {
+        copyOnWrite();
+        instance.removeMeta(index);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:transfer_protobuf.HeaderData)
+    }
+    private byte memoizedIsInitialized = -1;
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new transfer_protobuf.Commands.HeaderData();
+        }
+        case IS_INITIALIZED: {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized == 1) return DEFAULT_INSTANCE;
+          if (isInitialized == 0) return null;
+
+          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
+          if (!hasDevice()) {
+            if (shouldMemoize) {
+              memoizedIsInitialized = 0;
+            }
+            return null;
+          }
+          if (!getDevice().isInitialized()) {
+            if (shouldMemoize) {
+              memoizedIsInitialized = 0;
+            }
+            return null;
+          }
+          for (int i = 0; i < getMetaCount(); i++) {
+            if (!getMeta(i).isInitialized()) {
+              if (shouldMemoize) {
+                memoizedIsInitialized = 0;
+              }
+              return null;
+            }
+          }
+          if (shouldMemoize) memoizedIsInitialized = 1;
+          return DEFAULT_INSTANCE;
+
+        }
+        case MAKE_IMMUTABLE: {
+          meta_.makeImmutable();
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          transfer_protobuf.Commands.HeaderData other = (transfer_protobuf.Commands.HeaderData) arg1;
+          device_ = visitor.visitMessage(device_, other.device_);
+          ip_ = visitor.visitString(
+              hasIp(), ip_,
+              other.hasIp(), other.ip_);
+          meta_= visitor.visitList(meta_, other.meta_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+            bitField0_ |= other.bitField0_;
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!parseUnknownField(tag, input)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 10: {
+                  transfer_protobuf.Commands.Device.Builder subBuilder = null;
+                  if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                    subBuilder = device_.toBuilder();
+                  }
+                  device_ = input.readMessage(transfer_protobuf.Commands.Device.parser(), extensionRegistry);
+                  if (subBuilder != null) {
+                    subBuilder.mergeFrom(device_);
+                    device_ = subBuilder.buildPartial();
+                  }
+                  bitField0_ |= 0x00000001;
+                  break;
+                }
+                case 18: {
+                  String s = input.readString();
+                  bitField0_ |= 0x00000002;
+                  ip_ = s;
+                  break;
+                }
+                case 26: {
+                  if (!meta_.isModifiable()) {
+                    meta_ =
+                        com.google.protobuf.GeneratedMessageLite.mutableCopy(meta_);
+                  }
+                  meta_.add(
+                      input.readMessage(transfer_protobuf.Commands.MetaData.parser(), extensionRegistry));
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (transfer_protobuf.Commands.HeaderData.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:transfer_protobuf.HeaderData)
+    private static final transfer_protobuf.Commands.HeaderData DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new HeaderData();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static transfer_protobuf.Commands.HeaderData getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<HeaderData> PARSER;
+
+    public static com.google.protobuf.Parser<HeaderData> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface MetaDataOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:transfer_protobuf.MetaData)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required string key = 1;</code>
+     */
+    boolean hasKey();
+    /**
+     * <code>required string key = 1;</code>
+     */
+    java.lang.String getKey();
+    /**
+     * <code>required string key = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeyBytes();
+
+    /**
+     * <code>required string value = 2;</code>
+     */
+    boolean hasValue();
+    /**
+     * <code>required string value = 2;</code>
+     */
+    java.lang.String getValue();
+    /**
+     * <code>required string value = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getValueBytes();
+  }
+  /**
+   * Protobuf type {@code transfer_protobuf.MetaData}
+   */
+  public  static final class MetaData extends
+      com.google.protobuf.GeneratedMessageLite<
+          MetaData, MetaData.Builder> implements
+      // @@protoc_insertion_point(message_implements:transfer_protobuf.MetaData)
+      MetaDataOrBuilder {
+    private MetaData() {
+      key_ = "";
+      value_ = "";
+    }
+    private int bitField0_;
+    public static final int KEY_FIELD_NUMBER = 1;
+    private java.lang.String key_;
+    /**
+     * <code>required string key = 1;</code>
+     */
+    public boolean hasKey() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string key = 1;</code>
+     */
+    public java.lang.String getKey() {
+      return key_;
+    }
+    /**
+     * <code>required string key = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeyBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(key_);
+    }
+    /**
+     * <code>required string key = 1;</code>
+     */
+    private void setKey(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+      key_ = value;
+    }
+    /**
+     * <code>required string key = 1;</code>
+     */
+    private void clearKey() {
+      bitField0_ = (bitField0_ & ~0x00000001);
+      key_ = getDefaultInstance().getKey();
+    }
+    /**
+     * <code>required string key = 1;</code>
+     */
+    private void setKeyBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+      key_ = value.toStringUtf8();
+    }
+
+    public static final int VALUE_FIELD_NUMBER = 2;
+    private java.lang.String value_;
+    /**
+     * <code>required string value = 2;</code>
+     */
+    public boolean hasValue() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string value = 2;</code>
+     */
+    public java.lang.String getValue() {
+      return value_;
+    }
+    /**
+     * <code>required string value = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getValueBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(value_);
+    }
+    /**
+     * <code>required string value = 2;</code>
+     */
+    private void setValue(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+      value_ = value;
+    }
+    /**
+     * <code>required string value = 2;</code>
+     */
+    private void clearValue() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      value_ = getDefaultInstance().getValue();
+    }
+    /**
+     * <code>required string value = 2;</code>
+     */
+    private void setValueBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+      value_ = value.toStringUtf8();
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeString(1, getKey());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeString(2, getValue());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getKey());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getValue());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static transfer_protobuf.Commands.MetaData parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static transfer_protobuf.Commands.MetaData parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.MetaData parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static transfer_protobuf.Commands.MetaData parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.MetaData parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static transfer_protobuf.Commands.MetaData parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.MetaData parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static transfer_protobuf.Commands.MetaData parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.MetaData parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static transfer_protobuf.Commands.MetaData parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(transfer_protobuf.Commands.MetaData prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * Protobuf type {@code transfer_protobuf.MetaData}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          transfer_protobuf.Commands.MetaData, Builder> implements
+        // @@protoc_insertion_point(builder_implements:transfer_protobuf.MetaData)
+        transfer_protobuf.Commands.MetaDataOrBuilder {
+      // Construct using transfer_protobuf.Commands.MetaData.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public boolean hasKey() {
+        return instance.hasKey();
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public java.lang.String getKey() {
+        return instance.getKey();
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeyBytes() {
+        return instance.getKeyBytes();
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public Builder setKey(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setKey(value);
+        return this;
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public Builder clearKey() {
+        copyOnWrite();
+        instance.clearKey();
+        return this;
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public Builder setKeyBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setKeyBytes(value);
+        return this;
+      }
+
+      /**
+       * <code>required string value = 2;</code>
+       */
+      public boolean hasValue() {
+        return instance.hasValue();
+      }
+      /**
+       * <code>required string value = 2;</code>
+       */
+      public java.lang.String getValue() {
+        return instance.getValue();
+      }
+      /**
+       * <code>required string value = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getValueBytes() {
+        return instance.getValueBytes();
+      }
+      /**
+       * <code>required string value = 2;</code>
+       */
+      public Builder setValue(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setValue(value);
+        return this;
+      }
+      /**
+       * <code>required string value = 2;</code>
+       */
+      public Builder clearValue() {
+        copyOnWrite();
+        instance.clearValue();
+        return this;
+      }
+      /**
+       * <code>required string value = 2;</code>
+       */
+      public Builder setValueBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setValueBytes(value);
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:transfer_protobuf.MetaData)
+    }
+    private byte memoizedIsInitialized = -1;
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new transfer_protobuf.Commands.MetaData();
+        }
+        case IS_INITIALIZED: {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized == 1) return DEFAULT_INSTANCE;
+          if (isInitialized == 0) return null;
+
+          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
+          if (!hasKey()) {
+            if (shouldMemoize) {
+              memoizedIsInitialized = 0;
+            }
+            return null;
+          }
+          if (!hasValue()) {
+            if (shouldMemoize) {
+              memoizedIsInitialized = 0;
+            }
+            return null;
+          }
+          if (shouldMemoize) memoizedIsInitialized = 1;
+          return DEFAULT_INSTANCE;
+
+        }
+        case MAKE_IMMUTABLE: {
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          transfer_protobuf.Commands.MetaData other = (transfer_protobuf.Commands.MetaData) arg1;
+          key_ = visitor.visitString(
+              hasKey(), key_,
+              other.hasKey(), other.key_);
+          value_ = visitor.visitString(
+              hasValue(), value_,
+              other.hasValue(), other.value_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+            bitField0_ |= other.bitField0_;
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!parseUnknownField(tag, input)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 10: {
+                  String s = input.readString();
+                  bitField0_ |= 0x00000001;
+                  key_ = s;
+                  break;
+                }
+                case 18: {
+                  String s = input.readString();
+                  bitField0_ |= 0x00000002;
+                  value_ = s;
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (transfer_protobuf.Commands.MetaData.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:transfer_protobuf.MetaData)
+    private static final transfer_protobuf.Commands.MetaData DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new MetaData();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static transfer_protobuf.Commands.MetaData getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<MetaData> PARSER;
+
+    public static com.google.protobuf.Parser<MetaData> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface PingPongOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:transfer_protobuf.PingPong)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <pre>
+     *current device/server timestamp (UTC)
+     * </pre>
+     *
+     * <code>required int64 now = 1;</code>
+     */
+    boolean hasNow();
+    /**
+     * <pre>
+     *current device/server timestamp (UTC)
+     * </pre>
+     *
+     * <code>required int64 now = 1;</code>
+     */
+    long getNow();
+
+    /**
+     * <pre>
+     *next pong timestamp (server time, UTC)
+     * </pre>
+     *
+     * <code>optional int64 next = 2;</code>
+     */
+    boolean hasNext();
+    /**
+     * <pre>
+     *next pong timestamp (server time, UTC)
+     * </pre>
+     *
+     * <code>optional int64 next = 2;</code>
+     */
+    long getNext();
+  }
+  /**
+   * Protobuf type {@code transfer_protobuf.PingPong}
+   */
+  public  static final class PingPong extends
+      com.google.protobuf.GeneratedMessageLite<
+          PingPong, PingPong.Builder> implements
+      // @@protoc_insertion_point(message_implements:transfer_protobuf.PingPong)
+      PingPongOrBuilder {
+    private PingPong() {
+    }
+    private int bitField0_;
+    public static final int NOW_FIELD_NUMBER = 1;
+    private long now_;
+    /**
+     * <pre>
+     *current device/server timestamp (UTC)
+     * </pre>
+     *
+     * <code>required int64 now = 1;</code>
+     */
+    public boolean hasNow() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     *current device/server timestamp (UTC)
+     * </pre>
+     *
+     * <code>required int64 now = 1;</code>
+     */
+    public long getNow() {
+      return now_;
+    }
+    /**
+     * <pre>
+     *current device/server timestamp (UTC)
+     * </pre>
+     *
+     * <code>required int64 now = 1;</code>
+     */
+    private void setNow(long value) {
+      bitField0_ |= 0x00000001;
+      now_ = value;
+    }
+    /**
+     * <pre>
+     *current device/server timestamp (UTC)
+     * </pre>
+     *
+     * <code>required int64 now = 1;</code>
+     */
+    private void clearNow() {
+      bitField0_ = (bitField0_ & ~0x00000001);
+      now_ = 0L;
+    }
+
+    public static final int NEXT_FIELD_NUMBER = 2;
+    private long next_;
+    /**
+     * <pre>
+     *next pong timestamp (server time, UTC)
+     * </pre>
+     *
+     * <code>optional int64 next = 2;</code>
+     */
+    public boolean hasNext() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     *next pong timestamp (server time, UTC)
+     * </pre>
+     *
+     * <code>optional int64 next = 2;</code>
+     */
+    public long getNext() {
+      return next_;
+    }
+    /**
+     * <pre>
+     *next pong timestamp (server time, UTC)
+     * </pre>
+     *
+     * <code>optional int64 next = 2;</code>
+     */
+    private void setNext(long value) {
+      bitField0_ |= 0x00000002;
+      next_ = value;
+    }
+    /**
+     * <pre>
+     *next pong timestamp (server time, UTC)
+     * </pre>
+     *
+     * <code>optional int64 next = 2;</code>
+     */
+    private void clearNext() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      next_ = 0L;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, now_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, next_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, now_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, next_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static transfer_protobuf.Commands.PingPong parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static transfer_protobuf.Commands.PingPong parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.PingPong parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static transfer_protobuf.Commands.PingPong parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.PingPong parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static transfer_protobuf.Commands.PingPong parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.PingPong parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static transfer_protobuf.Commands.PingPong parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.PingPong parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static transfer_protobuf.Commands.PingPong parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(transfer_protobuf.Commands.PingPong prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * Protobuf type {@code transfer_protobuf.PingPong}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          transfer_protobuf.Commands.PingPong, Builder> implements
+        // @@protoc_insertion_point(builder_implements:transfer_protobuf.PingPong)
+        transfer_protobuf.Commands.PingPongOrBuilder {
+      // Construct using transfer_protobuf.Commands.PingPong.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <pre>
+       *current device/server timestamp (UTC)
+       * </pre>
+       *
+       * <code>required int64 now = 1;</code>
+       */
+      public boolean hasNow() {
+        return instance.hasNow();
+      }
+      /**
+       * <pre>
+       *current device/server timestamp (UTC)
+       * </pre>
+       *
+       * <code>required int64 now = 1;</code>
+       */
+      public long getNow() {
+        return instance.getNow();
+      }
+      /**
+       * <pre>
+       *current device/server timestamp (UTC)
+       * </pre>
+       *
+       * <code>required int64 now = 1;</code>
+       */
+      public Builder setNow(long value) {
+        copyOnWrite();
+        instance.setNow(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *current device/server timestamp (UTC)
+       * </pre>
+       *
+       * <code>required int64 now = 1;</code>
+       */
+      public Builder clearNow() {
+        copyOnWrite();
+        instance.clearNow();
+        return this;
+      }
+
+      /**
+       * <pre>
+       *next pong timestamp (server time, UTC)
+       * </pre>
+       *
+       * <code>optional int64 next = 2;</code>
+       */
+      public boolean hasNext() {
+        return instance.hasNext();
+      }
+      /**
+       * <pre>
+       *next pong timestamp (server time, UTC)
+       * </pre>
+       *
+       * <code>optional int64 next = 2;</code>
+       */
+      public long getNext() {
+        return instance.getNext();
+      }
+      /**
+       * <pre>
+       *next pong timestamp (server time, UTC)
+       * </pre>
+       *
+       * <code>optional int64 next = 2;</code>
+       */
+      public Builder setNext(long value) {
+        copyOnWrite();
+        instance.setNext(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *next pong timestamp (server time, UTC)
+       * </pre>
+       *
+       * <code>optional int64 next = 2;</code>
+       */
+      public Builder clearNext() {
+        copyOnWrite();
+        instance.clearNext();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:transfer_protobuf.PingPong)
+    }
+    private byte memoizedIsInitialized = -1;
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new transfer_protobuf.Commands.PingPong();
+        }
+        case IS_INITIALIZED: {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized == 1) return DEFAULT_INSTANCE;
+          if (isInitialized == 0) return null;
+
+          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
+          if (!hasNow()) {
+            if (shouldMemoize) {
+              memoizedIsInitialized = 0;
+            }
+            return null;
+          }
+          if (shouldMemoize) memoizedIsInitialized = 1;
+          return DEFAULT_INSTANCE;
+
+        }
+        case MAKE_IMMUTABLE: {
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          transfer_protobuf.Commands.PingPong other = (transfer_protobuf.Commands.PingPong) arg1;
+          now_ = visitor.visitLong(
+              hasNow(), now_,
+              other.hasNow(), other.now_);
+          next_ = visitor.visitLong(
+              hasNext(), next_,
+              other.hasNext(), other.next_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+            bitField0_ |= other.bitField0_;
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!parseUnknownField(tag, input)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 8: {
+                  bitField0_ |= 0x00000001;
+                  now_ = input.readInt64();
+                  break;
+                }
+                case 16: {
+                  bitField0_ |= 0x00000002;
+                  next_ = input.readInt64();
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (transfer_protobuf.Commands.PingPong.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:transfer_protobuf.PingPong)
+    private static final transfer_protobuf.Commands.PingPong DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new PingPong();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static transfer_protobuf.Commands.PingPong getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<PingPong> PARSER;
+
+    public static com.google.protobuf.Parser<PingPong> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
   public interface RegisterDataOrBuilder extends
       // @@protoc_insertion_point(interface_extends:transfer_protobuf.RegisterData)
       com.google.protobuf.MessageLiteOrBuilder {
@@ -3884,6 +5969,20 @@ public final class Commands {
      * <code>required .transfer_protobuf.BankCodeList bank_code_list = 1;</code>
      */
     transfer_protobuf.Commands.BankCodeList getBankCodeList();
+
+    /**
+     * <code>required string operator_id = 2;</code>
+     */
+    boolean hasOperatorId();
+    /**
+     * <code>required string operator_id = 2;</code>
+     */
+    java.lang.String getOperatorId();
+    /**
+     * <code>required string operator_id = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getOperatorIdBytes();
   }
   /**
    * Protobuf type {@code transfer_protobuf.RegisterData}
@@ -3894,6 +5993,7 @@ public final class Commands {
       // @@protoc_insertion_point(message_implements:transfer_protobuf.RegisterData)
       RegisterDataOrBuilder {
     private RegisterData() {
+      operatorId_ = "";
     }
     private int bitField0_;
     public static final int BANK_CODE_LIST_FIELD_NUMBER = 1;
@@ -3948,10 +6048,64 @@ public final class Commands {
       bitField0_ = (bitField0_ & ~0x00000001);
     }
 
+    public static final int OPERATOR_ID_FIELD_NUMBER = 2;
+    private java.lang.String operatorId_;
+    /**
+     * <code>required string operator_id = 2;</code>
+     */
+    public boolean hasOperatorId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string operator_id = 2;</code>
+     */
+    public java.lang.String getOperatorId() {
+      return operatorId_;
+    }
+    /**
+     * <code>required string operator_id = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getOperatorIdBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(operatorId_);
+    }
+    /**
+     * <code>required string operator_id = 2;</code>
+     */
+    private void setOperatorId(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+      operatorId_ = value;
+    }
+    /**
+     * <code>required string operator_id = 2;</code>
+     */
+    private void clearOperatorId() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      operatorId_ = getDefaultInstance().getOperatorId();
+    }
+    /**
+     * <code>required string operator_id = 2;</code>
+     */
+    private void setOperatorIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+      operatorId_ = value.toStringUtf8();
+    }
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, getBankCodeList());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeString(2, getOperatorId());
       }
       unknownFields.writeTo(output);
     }
@@ -3964,6 +6118,10 @@ public final class Commands {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getBankCodeList());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getOperatorId());
       }
       size += unknownFields.getSerializedSize();
       memoizedSerializedSize = size;
@@ -4097,6 +6255,52 @@ public final class Commands {
         return this;
       }
 
+      /**
+       * <code>required string operator_id = 2;</code>
+       */
+      public boolean hasOperatorId() {
+        return instance.hasOperatorId();
+      }
+      /**
+       * <code>required string operator_id = 2;</code>
+       */
+      public java.lang.String getOperatorId() {
+        return instance.getOperatorId();
+      }
+      /**
+       * <code>required string operator_id = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getOperatorIdBytes() {
+        return instance.getOperatorIdBytes();
+      }
+      /**
+       * <code>required string operator_id = 2;</code>
+       */
+      public Builder setOperatorId(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setOperatorId(value);
+        return this;
+      }
+      /**
+       * <code>required string operator_id = 2;</code>
+       */
+      public Builder clearOperatorId() {
+        copyOnWrite();
+        instance.clearOperatorId();
+        return this;
+      }
+      /**
+       * <code>required string operator_id = 2;</code>
+       */
+      public Builder setOperatorIdBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setOperatorIdBytes(value);
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:transfer_protobuf.RegisterData)
     }
     private byte memoizedIsInitialized = -1;
@@ -4119,6 +6323,12 @@ public final class Commands {
             }
             return null;
           }
+          if (!hasOperatorId()) {
+            if (shouldMemoize) {
+              memoizedIsInitialized = 0;
+            }
+            return null;
+          }
           if (shouldMemoize) memoizedIsInitialized = 1;
           return DEFAULT_INSTANCE;
 
@@ -4133,6 +6343,9 @@ public final class Commands {
           Visitor visitor = (Visitor) arg0;
           transfer_protobuf.Commands.RegisterData other = (transfer_protobuf.Commands.RegisterData) arg1;
           bankCodeList_ = visitor.visitMessage(bankCodeList_, other.bankCodeList_);
+          operatorId_ = visitor.visitString(
+              hasOperatorId(), operatorId_,
+              other.hasOperatorId(), other.operatorId_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
             bitField0_ |= other.bitField0_;
@@ -4169,6 +6382,12 @@ public final class Commands {
                     bankCodeList_ = subBuilder.buildPartial();
                   }
                   bitField0_ |= 0x00000001;
+                  break;
+                }
+                case 18: {
+                  String s = input.readString();
+                  bitField0_ |= 0x00000002;
+                  operatorId_ = s;
                   break;
                 }
               }
@@ -5443,6 +7662,20 @@ public final class Commands {
      */
     com.google.protobuf.ByteString
         getErrorMsgBytes();
+
+    /**
+     * <code>optional string back_url = 7;</code>
+     */
+    boolean hasBackUrl();
+    /**
+     * <code>optional string back_url = 7;</code>
+     */
+    java.lang.String getBackUrl();
+    /**
+     * <code>optional string back_url = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getBackUrlBytes();
   }
   /**
    * Protobuf type {@code transfer_protobuf.SyncBalanceData}
@@ -5457,6 +7690,7 @@ public final class Commands {
       orderId_ = "";
       errorCode_ = "";
       errorMsg_ = "";
+      backUrl_ = "";
     }
     private int bitField0_;
     public static final int BANK_FIELD_NUMBER = 1;
@@ -5744,6 +7978,57 @@ public final class Commands {
       errorMsg_ = value.toStringUtf8();
     }
 
+    public static final int BACK_URL_FIELD_NUMBER = 7;
+    private java.lang.String backUrl_;
+    /**
+     * <code>optional string back_url = 7;</code>
+     */
+    public boolean hasBackUrl() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string back_url = 7;</code>
+     */
+    public java.lang.String getBackUrl() {
+      return backUrl_;
+    }
+    /**
+     * <code>optional string back_url = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBackUrlBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(backUrl_);
+    }
+    /**
+     * <code>optional string back_url = 7;</code>
+     */
+    private void setBackUrl(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+      backUrl_ = value;
+    }
+    /**
+     * <code>optional string back_url = 7;</code>
+     */
+    private void clearBackUrl() {
+      bitField0_ = (bitField0_ & ~0x00000040);
+      backUrl_ = getDefaultInstance().getBackUrl();
+    }
+    /**
+     * <code>optional string back_url = 7;</code>
+     */
+    private void setBackUrlBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+      backUrl_ = value.toStringUtf8();
+    }
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -5763,6 +8048,9 @@ public final class Commands {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeString(6, getErrorMsg());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeString(7, getBackUrl());
       }
       unknownFields.writeTo(output);
     }
@@ -5795,6 +8083,10 @@ public final class Commands {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(6, getErrorMsg());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(7, getBackUrl());
       }
       size += unknownFields.getSerializedSize();
       memoizedSerializedSize = size;
@@ -6141,6 +8433,52 @@ public final class Commands {
         return this;
       }
 
+      /**
+       * <code>optional string back_url = 7;</code>
+       */
+      public boolean hasBackUrl() {
+        return instance.hasBackUrl();
+      }
+      /**
+       * <code>optional string back_url = 7;</code>
+       */
+      public java.lang.String getBackUrl() {
+        return instance.getBackUrl();
+      }
+      /**
+       * <code>optional string back_url = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBackUrlBytes() {
+        return instance.getBackUrlBytes();
+      }
+      /**
+       * <code>optional string back_url = 7;</code>
+       */
+      public Builder setBackUrl(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setBackUrl(value);
+        return this;
+      }
+      /**
+       * <code>optional string back_url = 7;</code>
+       */
+      public Builder clearBackUrl() {
+        copyOnWrite();
+        instance.clearBackUrl();
+        return this;
+      }
+      /**
+       * <code>optional string back_url = 7;</code>
+       */
+      public Builder setBackUrlBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setBackUrlBytes(value);
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:transfer_protobuf.SyncBalanceData)
     }
     private byte memoizedIsInitialized = -1;
@@ -6198,6 +8536,9 @@ public final class Commands {
           errorMsg_ = visitor.visitString(
               hasErrorMsg(), errorMsg_,
               other.hasErrorMsg(), other.errorMsg_);
+          backUrl_ = visitor.visitString(
+              hasBackUrl(), backUrl_,
+              other.hasBackUrl(), other.backUrl_);
           if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
               .INSTANCE) {
             bitField0_ |= other.bitField0_;
@@ -6265,6 +8606,12 @@ public final class Commands {
                   errorMsg_ = s;
                   break;
                 }
+                case 58: {
+                  String s = input.readString();
+                  bitField0_ |= 0x00000040;
+                  backUrl_ = s;
+                  break;
+                }
               }
             }
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -6307,6 +8654,737 @@ public final class Commands {
     private static volatile com.google.protobuf.Parser<SyncBalanceData> PARSER;
 
     public static com.google.protobuf.Parser<SyncBalanceData> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
+  }
+
+  public interface SyncHistoryDataOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:transfer_protobuf.SyncHistoryData)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required .transfer_protobuf.Bank bank = 1;</code>
+     */
+    boolean hasBank();
+    /**
+     * <code>required .transfer_protobuf.Bank bank = 1;</code>
+     */
+    transfer_protobuf.Commands.Bank getBank();
+
+    /**
+     * <code>required string job_id = 2;</code>
+     */
+    boolean hasJobId();
+    /**
+     * <code>required string job_id = 2;</code>
+     */
+    java.lang.String getJobId();
+    /**
+     * <code>required string job_id = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getJobIdBytes();
+
+    /**
+     * <code>optional int64 from = 3;</code>
+     */
+    boolean hasFrom();
+    /**
+     * <code>optional int64 from = 3;</code>
+     */
+    long getFrom();
+
+    /**
+     * <code>optional int64 to = 4;</code>
+     */
+    boolean hasTo();
+    /**
+     * <code>optional int64 to = 4;</code>
+     */
+    long getTo();
+
+    /**
+     * <code>required bool stop_when_duplicate = 5;</code>
+     */
+    boolean hasStopWhenDuplicate();
+    /**
+     * <code>required bool stop_when_duplicate = 5;</code>
+     */
+    boolean getStopWhenDuplicate();
+  }
+  /**
+   * Protobuf type {@code transfer_protobuf.SyncHistoryData}
+   */
+  public  static final class SyncHistoryData extends
+      com.google.protobuf.GeneratedMessageLite<
+          SyncHistoryData, SyncHistoryData.Builder> implements
+      // @@protoc_insertion_point(message_implements:transfer_protobuf.SyncHistoryData)
+      SyncHistoryDataOrBuilder {
+    private SyncHistoryData() {
+      jobId_ = "";
+    }
+    private int bitField0_;
+    public static final int BANK_FIELD_NUMBER = 1;
+    private transfer_protobuf.Commands.Bank bank_;
+    /**
+     * <code>required .transfer_protobuf.Bank bank = 1;</code>
+     */
+    public boolean hasBank() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .transfer_protobuf.Bank bank = 1;</code>
+     */
+    public transfer_protobuf.Commands.Bank getBank() {
+      return bank_ == null ? transfer_protobuf.Commands.Bank.getDefaultInstance() : bank_;
+    }
+    /**
+     * <code>required .transfer_protobuf.Bank bank = 1;</code>
+     */
+    private void setBank(transfer_protobuf.Commands.Bank value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bank_ = value;
+      bitField0_ |= 0x00000001;
+      }
+    /**
+     * <code>required .transfer_protobuf.Bank bank = 1;</code>
+     */
+    private void setBank(
+        transfer_protobuf.Commands.Bank.Builder builderForValue) {
+      bank_ = builderForValue.build();
+      bitField0_ |= 0x00000001;
+    }
+    /**
+     * <code>required .transfer_protobuf.Bank bank = 1;</code>
+     */
+    private void mergeBank(transfer_protobuf.Commands.Bank value) {
+      if (bank_ != null &&
+          bank_ != transfer_protobuf.Commands.Bank.getDefaultInstance()) {
+        bank_ =
+          transfer_protobuf.Commands.Bank.newBuilder(bank_).mergeFrom(value).buildPartial();
+      } else {
+        bank_ = value;
+      }
+      bitField0_ |= 0x00000001;
+    }
+    /**
+     * <code>required .transfer_protobuf.Bank bank = 1;</code>
+     */
+    private void clearBank() {  bank_ = null;
+      bitField0_ = (bitField0_ & ~0x00000001);
+    }
+
+    public static final int JOB_ID_FIELD_NUMBER = 2;
+    private java.lang.String jobId_;
+    /**
+     * <code>required string job_id = 2;</code>
+     */
+    public boolean hasJobId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string job_id = 2;</code>
+     */
+    public java.lang.String getJobId() {
+      return jobId_;
+    }
+    /**
+     * <code>required string job_id = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getJobIdBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(jobId_);
+    }
+    /**
+     * <code>required string job_id = 2;</code>
+     */
+    private void setJobId(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+      jobId_ = value;
+    }
+    /**
+     * <code>required string job_id = 2;</code>
+     */
+    private void clearJobId() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      jobId_ = getDefaultInstance().getJobId();
+    }
+    /**
+     * <code>required string job_id = 2;</code>
+     */
+    private void setJobIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+      jobId_ = value.toStringUtf8();
+    }
+
+    public static final int FROM_FIELD_NUMBER = 3;
+    private long from_;
+    /**
+     * <code>optional int64 from = 3;</code>
+     */
+    public boolean hasFrom() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 from = 3;</code>
+     */
+    public long getFrom() {
+      return from_;
+    }
+    /**
+     * <code>optional int64 from = 3;</code>
+     */
+    private void setFrom(long value) {
+      bitField0_ |= 0x00000004;
+      from_ = value;
+    }
+    /**
+     * <code>optional int64 from = 3;</code>
+     */
+    private void clearFrom() {
+      bitField0_ = (bitField0_ & ~0x00000004);
+      from_ = 0L;
+    }
+
+    public static final int TO_FIELD_NUMBER = 4;
+    private long to_;
+    /**
+     * <code>optional int64 to = 4;</code>
+     */
+    public boolean hasTo() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int64 to = 4;</code>
+     */
+    public long getTo() {
+      return to_;
+    }
+    /**
+     * <code>optional int64 to = 4;</code>
+     */
+    private void setTo(long value) {
+      bitField0_ |= 0x00000008;
+      to_ = value;
+    }
+    /**
+     * <code>optional int64 to = 4;</code>
+     */
+    private void clearTo() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      to_ = 0L;
+    }
+
+    public static final int STOP_WHEN_DUPLICATE_FIELD_NUMBER = 5;
+    private boolean stopWhenDuplicate_;
+    /**
+     * <code>required bool stop_when_duplicate = 5;</code>
+     */
+    public boolean hasStopWhenDuplicate() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required bool stop_when_duplicate = 5;</code>
+     */
+    public boolean getStopWhenDuplicate() {
+      return stopWhenDuplicate_;
+    }
+    /**
+     * <code>required bool stop_when_duplicate = 5;</code>
+     */
+    private void setStopWhenDuplicate(boolean value) {
+      bitField0_ |= 0x00000010;
+      stopWhenDuplicate_ = value;
+    }
+    /**
+     * <code>required bool stop_when_duplicate = 5;</code>
+     */
+    private void clearStopWhenDuplicate() {
+      bitField0_ = (bitField0_ & ~0x00000010);
+      stopWhenDuplicate_ = false;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, getBank());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeString(2, getJobId());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, from_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(4, to_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBool(5, stopWhenDuplicate_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getBank());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getJobId());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, from_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, to_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, stopWhenDuplicate_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    public static transfer_protobuf.Commands.SyncHistoryData parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static transfer_protobuf.Commands.SyncHistoryData parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.SyncHistoryData parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static transfer_protobuf.Commands.SyncHistoryData parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.SyncHistoryData parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static transfer_protobuf.Commands.SyncHistoryData parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.SyncHistoryData parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
+    }
+    public static transfer_protobuf.Commands.SyncHistoryData parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+    public static transfer_protobuf.Commands.SyncHistoryData parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
+    }
+    public static transfer_protobuf.Commands.SyncHistoryData parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(transfer_protobuf.Commands.SyncHistoryData prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    /**
+     * Protobuf type {@code transfer_protobuf.SyncHistoryData}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          transfer_protobuf.Commands.SyncHistoryData, Builder> implements
+        // @@protoc_insertion_point(builder_implements:transfer_protobuf.SyncHistoryData)
+        transfer_protobuf.Commands.SyncHistoryDataOrBuilder {
+      // Construct using transfer_protobuf.Commands.SyncHistoryData.newBuilder()
+      private Builder() {
+        super(DEFAULT_INSTANCE);
+      }
+
+
+      /**
+       * <code>required .transfer_protobuf.Bank bank = 1;</code>
+       */
+      public boolean hasBank() {
+        return instance.hasBank();
+      }
+      /**
+       * <code>required .transfer_protobuf.Bank bank = 1;</code>
+       */
+      public transfer_protobuf.Commands.Bank getBank() {
+        return instance.getBank();
+      }
+      /**
+       * <code>required .transfer_protobuf.Bank bank = 1;</code>
+       */
+      public Builder setBank(transfer_protobuf.Commands.Bank value) {
+        copyOnWrite();
+        instance.setBank(value);
+        return this;
+        }
+      /**
+       * <code>required .transfer_protobuf.Bank bank = 1;</code>
+       */
+      public Builder setBank(
+          transfer_protobuf.Commands.Bank.Builder builderForValue) {
+        copyOnWrite();
+        instance.setBank(builderForValue);
+        return this;
+      }
+      /**
+       * <code>required .transfer_protobuf.Bank bank = 1;</code>
+       */
+      public Builder mergeBank(transfer_protobuf.Commands.Bank value) {
+        copyOnWrite();
+        instance.mergeBank(value);
+        return this;
+      }
+      /**
+       * <code>required .transfer_protobuf.Bank bank = 1;</code>
+       */
+      public Builder clearBank() {  copyOnWrite();
+        instance.clearBank();
+        return this;
+      }
+
+      /**
+       * <code>required string job_id = 2;</code>
+       */
+      public boolean hasJobId() {
+        return instance.hasJobId();
+      }
+      /**
+       * <code>required string job_id = 2;</code>
+       */
+      public java.lang.String getJobId() {
+        return instance.getJobId();
+      }
+      /**
+       * <code>required string job_id = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getJobIdBytes() {
+        return instance.getJobIdBytes();
+      }
+      /**
+       * <code>required string job_id = 2;</code>
+       */
+      public Builder setJobId(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setJobId(value);
+        return this;
+      }
+      /**
+       * <code>required string job_id = 2;</code>
+       */
+      public Builder clearJobId() {
+        copyOnWrite();
+        instance.clearJobId();
+        return this;
+      }
+      /**
+       * <code>required string job_id = 2;</code>
+       */
+      public Builder setJobIdBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setJobIdBytes(value);
+        return this;
+      }
+
+      /**
+       * <code>optional int64 from = 3;</code>
+       */
+      public boolean hasFrom() {
+        return instance.hasFrom();
+      }
+      /**
+       * <code>optional int64 from = 3;</code>
+       */
+      public long getFrom() {
+        return instance.getFrom();
+      }
+      /**
+       * <code>optional int64 from = 3;</code>
+       */
+      public Builder setFrom(long value) {
+        copyOnWrite();
+        instance.setFrom(value);
+        return this;
+      }
+      /**
+       * <code>optional int64 from = 3;</code>
+       */
+      public Builder clearFrom() {
+        copyOnWrite();
+        instance.clearFrom();
+        return this;
+      }
+
+      /**
+       * <code>optional int64 to = 4;</code>
+       */
+      public boolean hasTo() {
+        return instance.hasTo();
+      }
+      /**
+       * <code>optional int64 to = 4;</code>
+       */
+      public long getTo() {
+        return instance.getTo();
+      }
+      /**
+       * <code>optional int64 to = 4;</code>
+       */
+      public Builder setTo(long value) {
+        copyOnWrite();
+        instance.setTo(value);
+        return this;
+      }
+      /**
+       * <code>optional int64 to = 4;</code>
+       */
+      public Builder clearTo() {
+        copyOnWrite();
+        instance.clearTo();
+        return this;
+      }
+
+      /**
+       * <code>required bool stop_when_duplicate = 5;</code>
+       */
+      public boolean hasStopWhenDuplicate() {
+        return instance.hasStopWhenDuplicate();
+      }
+      /**
+       * <code>required bool stop_when_duplicate = 5;</code>
+       */
+      public boolean getStopWhenDuplicate() {
+        return instance.getStopWhenDuplicate();
+      }
+      /**
+       * <code>required bool stop_when_duplicate = 5;</code>
+       */
+      public Builder setStopWhenDuplicate(boolean value) {
+        copyOnWrite();
+        instance.setStopWhenDuplicate(value);
+        return this;
+      }
+      /**
+       * <code>required bool stop_when_duplicate = 5;</code>
+       */
+      public Builder clearStopWhenDuplicate() {
+        copyOnWrite();
+        instance.clearStopWhenDuplicate();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:transfer_protobuf.SyncHistoryData)
+    }
+    private byte memoizedIsInitialized = -1;
+    protected final Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        Object arg0, Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new transfer_protobuf.Commands.SyncHistoryData();
+        }
+        case IS_INITIALIZED: {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized == 1) return DEFAULT_INSTANCE;
+          if (isInitialized == 0) return null;
+
+          boolean shouldMemoize = ((Boolean) arg0).booleanValue();
+          if (!hasBank()) {
+            if (shouldMemoize) {
+              memoizedIsInitialized = 0;
+            }
+            return null;
+          }
+          if (!hasJobId()) {
+            if (shouldMemoize) {
+              memoizedIsInitialized = 0;
+            }
+            return null;
+          }
+          if (!hasStopWhenDuplicate()) {
+            if (shouldMemoize) {
+              memoizedIsInitialized = 0;
+            }
+            return null;
+          }
+          if (shouldMemoize) memoizedIsInitialized = 1;
+          return DEFAULT_INSTANCE;
+
+        }
+        case MAKE_IMMUTABLE: {
+          return null;
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case VISIT: {
+          Visitor visitor = (Visitor) arg0;
+          transfer_protobuf.Commands.SyncHistoryData other = (transfer_protobuf.Commands.SyncHistoryData) arg1;
+          bank_ = visitor.visitMessage(bank_, other.bank_);
+          jobId_ = visitor.visitString(
+              hasJobId(), jobId_,
+              other.hasJobId(), other.jobId_);
+          from_ = visitor.visitLong(
+              hasFrom(), from_,
+              other.hasFrom(), other.from_);
+          to_ = visitor.visitLong(
+              hasTo(), to_,
+              other.hasTo(), other.to_);
+          stopWhenDuplicate_ = visitor.visitBoolean(
+              hasStopWhenDuplicate(), stopWhenDuplicate_,
+              other.hasStopWhenDuplicate(), other.stopWhenDuplicate_);
+          if (visitor == com.google.protobuf.GeneratedMessageLite.MergeFromVisitor
+              .INSTANCE) {
+            bitField0_ |= other.bitField0_;
+          }
+          return this;
+        }
+        case MERGE_FROM_STREAM: {
+          com.google.protobuf.CodedInputStream input =
+              (com.google.protobuf.CodedInputStream) arg0;
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry =
+              (com.google.protobuf.ExtensionRegistryLite) arg1;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!parseUnknownField(tag, input)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 10: {
+                  transfer_protobuf.Commands.Bank.Builder subBuilder = null;
+                  if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                    subBuilder = bank_.toBuilder();
+                  }
+                  bank_ = input.readMessage(transfer_protobuf.Commands.Bank.parser(), extensionRegistry);
+                  if (subBuilder != null) {
+                    subBuilder.mergeFrom(bank_);
+                    bank_ = subBuilder.buildPartial();
+                  }
+                  bitField0_ |= 0x00000001;
+                  break;
+                }
+                case 18: {
+                  String s = input.readString();
+                  bitField0_ |= 0x00000002;
+                  jobId_ = s;
+                  break;
+                }
+                case 24: {
+                  bitField0_ |= 0x00000004;
+                  from_ = input.readInt64();
+                  break;
+                }
+                case 32: {
+                  bitField0_ |= 0x00000008;
+                  to_ = input.readInt64();
+                  break;
+                }
+                case 40: {
+                  bitField0_ |= 0x00000010;
+                  stopWhenDuplicate_ = input.readBool();
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw new RuntimeException(e.setUnfinishedMessage(this));
+          } catch (java.io.IOException e) {
+            throw new RuntimeException(
+                new com.google.protobuf.InvalidProtocolBufferException(
+                    e.getMessage()).setUnfinishedMessage(this));
+          } finally {
+          }
+        }
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          if (PARSER == null) {    synchronized (transfer_protobuf.Commands.SyncHistoryData.class) {
+              if (PARSER == null) {
+                PARSER = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+              }
+            }
+          }
+          return PARSER;
+        }
+      }
+      throw new UnsupportedOperationException();
+    }
+
+
+    // @@protoc_insertion_point(class_scope:transfer_protobuf.SyncHistoryData)
+    private static final transfer_protobuf.Commands.SyncHistoryData DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new SyncHistoryData();
+      DEFAULT_INSTANCE.makeImmutable();
+    }
+
+    public static transfer_protobuf.Commands.SyncHistoryData getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<SyncHistoryData> PARSER;
+
+    public static com.google.protobuf.Parser<SyncHistoryData> parser() {
       return DEFAULT_INSTANCE.getParserForType();
     }
   }
